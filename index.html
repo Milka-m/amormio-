@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Para Mi Amor 🤍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0f1021; --bg2:#1b1c3a;
+      --pink:#ff6aa6; --rose:#ff7e7e; --gold:#ffd166;
+      --white:#ffffff; --gray:#bdbdbd; --black:#111111;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --card-bg: rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:"Quicksand",system-ui,-apple-system,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased;}
+    body{
+      color:var(--white);
+      background:
+        radial-gradient(900px 600px at 85% -10%, rgba(255,106,166,.08), transparent 40%),
+        radial-gradient(800px 500px at 10% 110%, rgba(255,209,102,.06), transparent 40%),
+        linear-gradient(120deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* --- Hearts background --- */
+    .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+    .heart{
+      position:absolute; width:18px; height:18px; transform:rotate(45deg);
+      background:currentColor; opacity:.85; border-radius:3px;
+      animation-name:float; animation-timing-function:linear; animation-iteration-count:infinite;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+    }
+    .heart::before,.heart::after{content:""; position:absolute; width:18px; height:18px; background:inherit; border-radius:50%;}
+    .heart::before{left:-9px}
+    .heart::after{top:-9px}
+    @keyframes float{
+      from{transform:translateY(110vh) rotate(45deg) scale(var(--s)); opacity:.95;}
+      to{transform:translateY(-25vh) rotate(45deg) scale(var(--s)); opacity:.35;}
+    }
+    .heart.pulse{
+      animation-name:float,pulse-size;
+      animation-duration: var(--t), 3s;
+      animation-iteration-count: infinite, infinite;
+      animation-timing-function: linear, ease-in-out;
+    }
+    @keyframes pulse-size{0%,100%{transform: scale(var(--s)) rotate(45deg)}50%{transform: scale(calc(var(--s) * 1.15)) rotate(45deg)}}
+
+    /* --- Layout --- */
+    header {
+  padding: 36px 20px 12px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-family: "Great Vibes", cursive;
+  font-size: 48px;
+  margin: 0;
+  background: linear-gradient(90deg, var(--gold), var(--pink));
+  -webkit-background-clip: text;      /* Safari y Chrome */
+  background-clip: text;              /* Estándar */
+  -webkit-text-fill-color: transparent; /* Necesario en WebKit */
+  color: transparent;                 /* Fallback */
+  text-shadow: 0 8px 22px rgba(0, 0, 0, .45);
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  opacity: .92;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .92);
+}
+
+
+    .card{
+      width:min(1000px,95%); margin:20px auto 30px; background:var(--card-bg);
+      border-radius:20px; border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow); backdrop-filter: blur(10px); position:relative; z-index:2;
+      overflow:hidden;
+    }
+
+    .grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:22px; padding:22px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr; padding:16px} }
+
+    .hero{
+      border-radius:14px; min-height:260px; display:grid; place-items:center; position:relative; overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.2)),
+        url('fotos/1624B118-B886-4979-B0A9-D0703549A143_1_105_c.jpeg') center/cover no-repeat;
+      box-shadow: inset 0 -40px 80px rgba(0,0,0,.25);
+    }
+    .hero h2{font-family:"Great Vibes",cursive; font-size:44px; margin:0; color:var(--white); text-shadow:0 8px 24px rgba(0,0,0,.6)}
+    .chips{display:flex; gap:8px; margin-top:10px; justify-content:center; flex-wrap:wrap}
+    .chip{padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.08); font-size:13px}
+
+    /* Letter */
+    .letter{padding:18px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.06)}
+    .letter h3{margin:0 0 8px; color:var(--pink); font-size:1.2rem}
+    .letter p{margin:.5rem 0; color:rgba(255,255,255,.95); line-height:1.6}
+
+    /* Buttons */
+    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      border:0; padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer; display:inline-flex; gap:8px; align-items:center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:linear-gradient(90deg,var(--gold),var(--pink)); color:var(--black); box-shadow:0 10px 28px rgba(0,0,0,.25)}
+    .btn.ghost{background:rgba(255,255,255,.04); color:var(--white); border:1px solid rgba(255,255,255,.06)}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
+    .gallery img{width:100%; height:140px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.06)}
+    @media (max-width:520px){ .gallery{grid-template-columns:repeat(2,1fr)} .gallery img{height:110px} }
+
+    /* Timeline */
+    .timeline{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px}
+    .event{padding:12px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06)}
+    @media (max-width:880px){ .timeline{grid-template-columns:1fr} }
+
+    /* Modal / paper */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6); z-index:80}
+    .modal.open{display:grid}
+    .paper{width:min(760px,94%); background:#fffaf6; color:#3a2c2c; border-radius:16px; padding:22px; box-shadow:0 30px 80px rgba(0,0,0,.45); position:relative}
+    .paper h3{font-family:"Great Vibes",cursive; margin:0 0 8px; color:var(--rose); font-size:2.1rem}
+    .paper .close{position:absolute; right:10px; top:10px; background:transparent; border:0; font-size:26px; cursor:pointer}
+
+    /* audio pill */
+    .audio-pill{position:fixed; left:14px; bottom:14px; z-index:90; display:flex; gap:10px; align-items:center; background:rgba(255,255,255,.06); padding:10px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.08)}
+    .pulse{width:10px; height:10px; border-radius:50%; background:var(--gray); transition:all .25s ease}
+    .pulse.active{background:var(--gold); box-shadow:0 0 0 8px rgba(255,209,102,0.12); animation:beat 2s infinite ease-in-out}
+    @keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+    footer{padding:16px; text-align:center; color:rgba(255,255,255,.85); font-size:.95rem; z-index:2; position:relative}
+    /* small screens tweaks */
+    @media (max-width:520px){
+      .title{font-size:36px}
+      .hero h2{font-size:34px}
+      .paper h3{font-size:1.5rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- floating hearts -->
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <header>
+    <h1 class="title">Para mi persona favorita</h1>
+    <p class="subtitle">Un detalle hecho con todo mi cariño, solo para ti. ✨</p>
+  </header>
+
+  <main class="card" role="main">
+    <div class="grid">
+      <!-- left -->
+      <section aria-label="Sección principal">
+        <div class="hero" role="img" aria-label="Imagen romántica de fondo">
+          <h2>Te amo, <span id="nombre">Amor</span> 💌</h2>
+          <div class="chips" aria-hidden="true">
+            <span class="chip">Mi refugio</span>
+            <span class="chip">Mi alegría</span>
+            <span class="chip">Mi cómplice</span>
+          </div>
+        </div>
+
+        <h3 style="margin:14px 4px 6px;color:var(--gold)">Nuestros momentos</h3>
+        <div class="gallery" id="gallery" aria-label="Galería de fotos">
+          <img src="fotos/5657A947-BFAB-41B7-B80D-5AC438B44296_1_105_c.jpeg" alt="Juntos 1"/>
+          <img src="fotos/A5BB9494-ED08-47E8-965A-FFF3AFF4B0F3_1_105_c.jpeg" alt="Juntos 2"/>
+          <img src="fotos/AA0BFC5C-06C3-438A-BEC9-12E66B20F795_1_105_c.jpeg" alt="Juntos 3"/>
+          <img src="fotos/238C33EE-AA36-4164-84F0-9BDFED5EA8DE_1_105_c.jpeg" alt="Juntos 4"/>
+          <img src="fotos/1BB23A79-E031-417C-B83A-E0B9BCA008AA_1_105_c.jpeg" alt="Juntos 5"/>
+          <img src="fotos/11E70C91-2E70-4A91-B817-744FFD038D81_1_105_c.jpeg" alt="Juntos 6"/>
+          <img src="fotos/C77E9C85-E9B3-415B-B1A5-A28FC43F26D9_1_105_c.jpeg" alt="Juntos 7"/>
+          <img src="fotos/A002AC18-F50A-42E8-A0AE-78FCD894F00D_1_105_c.jpeg" alt="Juntos 8"/>
+          <img src="fotos/64B6331C-AC65-4BDD-B0A7-29FE252064BC.jpeg" alt="Juntos 9"/>
+          <img src="fotos/C542F191-659C-499C-A169-E45ADF37EF32_1_105_c.jpeg" alt="Juntos 10"/>
+          <img src="fotos/6958EB1F-D4ED-4107-9456-63CF9DADCA23_1_105_c.jpeg" alt="Juntos 11"/>
+          <img src="fotos/50FDEC3B-507F-4B67-AE58-FF551FA41333_1_105_c.jpeg" alt="Juntos 12"/>
+          <img src="fotos/6D6C555E-4570-4944-98CF-FC1AD37896E3_1_105_c.jpeg" alt="Juntos 13"/>
+          <img src="fotos/1BB23A79-E031-417C-B83A-E0B9BCA008AA_1_105_c.jpeg" alt="Juntos 14"/>
+          <img src="fotos/9F4FD3DD-9447-4B26-AD3F-ADECF7A2664C_1_105_c.jpeg" alt="Juntos 15"/>
+        </div>
+      </section>
+
+      <!-- right -->
+      <section>
+        <div class="letter" aria-label="Carta">
+          <h3>Una cartita para ti</h3>
+          <p>
+            Desde que llegaste, todo brilla distinto. Gracias por tu risa, por tu paciencia,
+            por creer conmigo. Hoy quiero recordarte lo mucho que te admiro y lo feliz que me haces.
+          </p>
+          <p>
+            Oprime el botón para abrir la carta completa. Prometo que tiene sorpresas. 🙈
+          </p>
+
+          <div class="btns" role="toolbar" aria-label="Controles">
+            <button class="btn primary" id="openLetter" aria-haspopup="dialog">Abrir carta ✉️</button>
+            <button class="btn ghost" id="confettiBtn">Lluvia de corazones 💖</button>
+          </div>
+        </div>
+
+        <h3 style="margin:18px 6px 8px;color:var(--pink)">Nuestra línea de tiempo</h3>
+        <div class="timeline" id="timeline">
+          <div class="event"><strong>La primera vez que te vi</strong><br><small>17/01/2022</small><p>Es algo que ya sabes, pero me encantaste desde la primera vez que te vi en la clase de gramatica, apesar que solo te vi los ojos por la mascarilla, hubo algo en ti que me atrapo y henos aqui 3 años despues, creyendo en nosotros, tratando de ser mejor que el dia anterior y enmendando los errores que cometimos en el pasado.</p></div>
+          <div class="event"><strong>Tiempo record</strong><br><small>21/07/2022</small><p>Los nervios, las risas, y todo lo demás, ese día sabía que el tiempo que te había dado, o el tiempo que llorando y hablando con Dios te di, no mas te quedaban 9 dias para agosto, cuando el 1 de agosto llegara y nada pasaba prometi sacarte de mi corazón, pero creo que sentiste que tenias poco tiempo jajajaj, y desde ahi el 21 es nuestro.</p></div>
+          <div class="event"><strong>Eres mi todo & 4ever</strong><br><small>9-10/04/2025</small><p>Creí haberte perdido para siempre, creí todo lo que un dia prometimos se habia terminado, creí perder al amor de mi vida, al compañero que logre encontrar entre millones de personas, pero creo los planes de Dios son perfectos y aqui estamos de nuevo, intentando ser mejores para el otro porque merecemos todo lo bonito del mundo.</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>Hecho con ❤️ por mí, para ti.</footer>
+
+  <!-- modal carta -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="paper" role="document">
+      <button class="close" id="closeModal" aria-label="Cerrar carta">×</button>
+      <h3>Mi carta para ti</h3>
+      <p>
+        26/08/25 8:45 pm <br>
+        Hola guapo de mi corazón, espero estes bien….
+        se que hoy fue un largo día, cansado a mas no poder, pero créeme, se que vendrán momentos mejores para nuestras vidas, pero por el momento toca hecharle ganas. 
+        Erick es un ser humano increíble y aunque no lo diga mucho, te admiro, te admiro porque eres inteligente, trabajador, hechado para adelante, cualquiera se hubiese rendido ya, pero tu no, es una de las cosas que día a día me confirman que eres tu y siempre serás tu.
+        Gracias por ser un amigo y compañero grandioso, gracias por aceptar compartir tu vida conmigo, y aunque las cosas no sean tan lindas a veces solo tenemos que agarrarnos mas fuerte el uno al otro y pedirle a Dios que nos guíe y que sea nuestro centro, gracias absolutamente tanto, me has dado cosas que nadie mas me a logrado dar, y no me refiero a cosas materiales porque eso cualquiera lo da, me refiero a cosas mas emocionales, me has ayudado a crecer, creer mas en mi, a madurar hasta cierto punto, me has dado cosas y enseñado cosas que la plata jamas en la vida va a poder pagar, quiero que seas mi por siempre.
+        -te amo.🤍🤴🏽
+      </p>
+      <p>
+        Eres mi lugar seguro. Gracias por quedarte. <br><em>Con todo mi amor y cariño,</em><br><strong>Milka M.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- audio pill -->
+  <div class="audio-pill" aria-hidden="false">
+    <div class="pulse" id="pulse" aria-hidden="true"></div>
+    <button class="btn ghost" id="toggleMusic" aria-pressed="false">▶️ Música</button>
+    <audio id="song" preload="auto" crossorigin="anonymous">
+      <!-- Si este enlace deja de funcionar, reemplázalo por otro MP3 público -->
+      <source src="fotos/Jay Wheeler & Noreh - Lugar Seguro (Official Visualizer) - Jay Wheeler.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- lightbox container (se añadirá dinámicamente) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ---------- Hearts (lluvia pausada y abundante) ---------- */
+      const heartsContainer = document.getElementById('hearts');
+      const colors = ["var(--gold)","var(--white)","var(--pink)","var(--gray)","var(--black)"];
+      // Ajusta la cantidad según pantalla para no sobrecargar móvil
+      const isMobile = window.matchMedia('(max-width:520px)').matches;
+      const TOTAL = isMobile ? 40 : 80;
+
+      // crea corazones escalonados para suavizar el inicio
+      for (let i=0;i<TOTAL;i++){
+        createHeart(i * 120); // stagger
+      }
+
+      function createHeart(delay = 0) {
+        // crear con pequeño timeout para escalonar
+        setTimeout(() => {
+          const el = document.createElement('div');
+          el.className = 'heart';
+          // posición horizontal inicial
+          const left = Math.random() * 100;
+          el.style.left = left + 'vw';
+          // tamaño relativo
+          const s = (0.55 + Math.random() * 1.25).toFixed(2);
+          el.style.setProperty('--s', s);
+          // duración más lenta y variada (pausada)
+          const dur = (18 + Math.random() * 30).toFixed(1);
+          el.style.setProperty('--t', dur + 's');
+          // color: usar currentColor vía style.color
+          el.style.color = colors[Math.floor(Math.random() * colors.length)];
+          // opcional pulso
+          if (Math.random() > 0.78) el.classList.add('pulse');
+          heartsContainer.appendChild(el);
+
+          // cuando termina la animación (aprox dur segundos) remover y recrear para loop suave
+          const lifetime = (parseFloat(dur) + 2) * 1000;
+          setTimeout(() => {
+            el.remove();
+            // recrear uno nuevo para mantener la cantidad constante
+            createHeart(0);
+          }, lifetime);
+        }, delay);
+      }
+
+      /* ---------- Modal (abrir/cerrar carta) ---------- */
+      const modal = document.getElementById('modal');
+      const openLetterBtn = document.getElementById('openLetter');
+      const closeModalBtn = document.getElementById('closeModal');
+
+      function openModal(){
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        // foco de accesibilidad
+        closeModalBtn.focus();
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+      }
+
+      openLetterBtn?.addEventListener('click', () => openModal());
+      closeModalBtn?.addEventListener('click', () => closeModal());
+      // cerrar tocando fondo
+      modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      // cerrar con escape
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+
+      /* ---------- Confetti / lluvia puntual al abrir la carta ---------- */
+      function sprinkleHearts(n=48, speed=1800){
+        for (let i=0;i<n;i++){
+          const s = document.createElement('span');
+          s.textContent = '❤';
+          s.style.position = 'fixed';
+          s.style.left = (Math.random()*100) + 'vw';
+          s.style.top = '-8vh';
+          s.style.fontSize = (12 + Math.random()*28) + 'px';
+          s.style.color = colors[Math.floor(Math.random()*colors.length)];
+          s.style.zIndex = 120;
+          s.style.transition = `transform ${speed/1000}s cubic-bezier(.2,.8,.2,1), opacity ${speed/1000}s ease`;
+          document.body.appendChild(s);
+          // force paint then animate
+          requestAnimationFrame(()=> {
+            const to = (110 + Math.random()*30);
+            const rot = (Math.random()*160 - 80);
+            s.style.transform = `translateY(${to}vh) rotate(${rot}deg)`;
+            s.style.opacity = '0';
+          });
+          setTimeout(()=> s.remove(), speed + 200);
+        }
+      }
+
+      const confettiBtn = document.getElementById('confettiBtn');
+      confettiBtn?.addEventListener('click', () => sprinkleHearts(64, 2400));
+
+      // al abrir carta también lanzar lluvia suave
+      openLetterBtn?.addEventListener('click', () => sprinkleHearts(48, 2200));
+
+      /* ---------- Lightbox para galería ---------- */
+      const gallery = document.getElementById('gallery');
+      let lightboxEl = null;
+
+      function openLightbox(src, alt='Foto'){
+        // si ya existe, remover
+        closeLightbox();
+        lightboxEl = document.createElement('div');
+        lightboxEl.className = 'modal open';
+        lightboxEl.style.zIndex = 200;
+        lightboxEl.innerHTML = `
+          <div class="paper" style="background:#0b0b12;color:#fff;padding:10px;border-radius:10px;max-width:95%;box-shadow:0 40px 80px rgba(0,0,0,.6);">
+            <button class="close" aria-label="Cerrar imagen" style="position:absolute;right:8px;top:8px;background:transparent;border:0;color:white;font-size:22px">×</button>
+            <img src="${src}" alt="${alt}" style="display:block;max-width:96vw;max-height:80vh;margin:6px auto;border-radius:8px;object-fit:contain"/>
+          </div>
+        `;
+        document.body.appendChild(lightboxEl);
+        lightboxEl.querySelector('.close')?.addEventListener('click', closeLightbox);
+        lightboxEl.addEventListener('click', (e) => { if (e.target === lightboxEl) closeLightbox(); });
+      }
+      function closeLightbox(){
+        if (lightboxEl){ lightboxEl.remove(); lightboxEl = null; }
+      }
+
+      gallery?.addEventListener('click', (e) => {
+        const img = e.target;
+        if (img && img.tagName === 'IMG') openLightbox(img.src, img.alt || 'Foto');
+      });
+
+      /* ---------- Música: Lugar Seguro - Jay Wheeler ---------- */
+      const audio = document.getElementById('song');
+      const playBtn = document.getElementById('toggleMusic');
+      const pulse = document.getElementById('pulse');
+      let isPlaying = false;
+
+      // Si quieres usar otra fuente, reemplaza el <source> en el HTML
+      // Manejo robusto: cambiar texto/estado y animación de pulse
+      async function togglePlay(){
+        if (!audio) return;
+        try{
+          if (!isPlaying){
+            // intenta reproducir (algunos navegadores requieren interacción, ya hay interacción)
+            await audio.play();
+            isPlaying = true;
+            playBtn.textContent = '⏸️ Pausar';
+            playBtn.setAttribute('aria-pressed','true');
+            pulse.classList.add('active');
+          } else {
+            audio.pause();
+            isPlaying = false;
+            playBtn.textContent = '▶️ Música';
+            playBtn.setAttribute('aria-pressed','false');
+            pulse.classList.remove('active');
+          }
+        } catch(err){
+          console.warn('Error al reproducir audio:', err);
+          alert('No se pudo reproducir la canción desde esa URL. Puedes reemplazar el <source> en el HTML por otra URL de MP3 pública.');
+        }
+      }
+      playBtn?.addEventListener('click', togglePlay);
+
+      // Actualiza estado cuando audio finaliza
+      audio?.addEventListener('ended', () => {
+        isPlaying = false;
+        playBtn.textContent = '▶️ Música';
+        playBtn.setAttribute('aria-pressed','false');
+        pulse.classList.remove('active');
+      });
+
+      /* ---------- Pequeñas protecciones y mejoras ---------- */
+      // Evitar que botones no definidos rompan el script:
+      if(!openLetterBtn) console.warn('#openLetter no encontrado');
+      if(!confettiBtn) console.warn('#confettiBtn no encontrado');
+      if(!playBtn) console.warn('#toggleMusic no encontrado');
+
+      // Permitir personalizar nombre con ?nombre=...
+      const q = new URLSearchParams(location.search);
+      const nombre = q.get('nombre');
+      if (nombre){
+        const el = document.getElementById('nombre');
+        if (el) el.textContent = nombre;
+      }
+    });
+  </script>
+</body>
+</html>
